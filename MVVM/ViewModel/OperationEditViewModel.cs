@@ -15,19 +15,24 @@ namespace Wallet22.MVVM.ViewModel
         public ICommand EditCommand { get; set; }
         public OperationEditViewModel(Operation operation)
         {
-            Date = operation.Date;
-            Type = operation.Type;
-            Amount = operation.Amount.ToString();
-            Description = operation.Description;
-            EditCommand = new Command(() =>
+            _date = operation.Date;
+            _type = operation.Type;
+            _amount = operation.Amount.ToString();
+            _description = operation.Description;
+            EditCommand = new Command(async () =>
             {
-
+                operation.Date = _date;
+                operation.Type = _type;
+                operation.Amount = Convert.ToInt32(_amount);
+                operation.Description = _description;
+                await Shell.Current.Navigation.PopAsync();
             },
             canExecute);
         }
         public override void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             base.OnPropertyChanged(prop);
+            ((Command)EditCommand).ChangeCanExecute();
         }
     }
 }
