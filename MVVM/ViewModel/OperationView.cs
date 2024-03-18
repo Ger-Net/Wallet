@@ -14,7 +14,7 @@ namespace Wallet22.MVVM.ViewModel
         public ICommand EditCommand {  get; set; }
         public ICommand DeleteCommand { get; set; }
         public ObservableCollection<Operation> Operations { get; } = new();
-
+        
         public OperationView() : base()
         {
             
@@ -27,6 +27,7 @@ namespace Wallet22.MVVM.ViewModel
             EditCommand = new Command<Operation>(async (Operation operation) =>
             {
                 await Shell.Current.Navigation.PushAsync(new OperationEditPage(operation));
+
             });
             DeleteCommand = new Command<Operation>((Operation operation) =>
             {

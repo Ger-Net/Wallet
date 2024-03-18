@@ -15,10 +15,6 @@ namespace Wallet22.MVVM.ViewModel
         public ICommand EditCommand { get; set; }
         public OperationEditViewModel(Operation operation) : base()
         {
-            _date = operation.Date;
-            _type = operation.Type;
-            _amount = operation.Amount.ToString();
-            _description = operation.Description;
             EditCommand = new Command(async () =>
             {
                 operation.Date = Date;
@@ -28,6 +24,11 @@ namespace Wallet22.MVVM.ViewModel
                 await Shell.Current.Navigation.PopAsync();
             },
             canExecute);
+            _date = operation.Date;
+            _type = operation.Type;
+            _amount = operation.Amount.ToString();
+            _description = operation.Description;
+            
         }
         public override void OnPropertyChanged([CallerMemberName] string prop = "")
         {

@@ -38,6 +38,7 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                         <Grid Padding="5">
+                            
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
@@ -54,13 +55,12 @@
                                     Source={RelativeSource AncestorType={x:Type ContentPage}}}" 
                                     CommandParameter="{Binding .}" 
                                     Grid.Column="4"/>
-                            <Button Text="Удалить" HorizontalOptions="End" 
+                            <Button Text="Удалить" HorizontalOptions="EndAndExpand" 
                                     Command="{Binding BindingContext.DeleteCommand, 
                                     Source={RelativeSource AncestorType={x:Type ContentPage}}}" 
                                     CommandParameter="{Binding .}"
                                     Grid.Column="4"/>    
                         </Grid>
-                        
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

@@ -15,6 +15,6 @@ public partial class OperationEditPage : ContentPage
 			operation = new Operation();
 		}
 		Operation = operation;
-		BindingContext = new OperationEditViewModel(operation);
+		BindingContext = new OperationEditViewModel(Operation);
 	}
 }
