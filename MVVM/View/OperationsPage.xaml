@@ -18,28 +18,51 @@
             <Button Text="Учёт" WidthRequest="100" HorizontalOptions="Start"
                         Command="{Binding AddCommand}"/>
         </HorizontalStackLayout>
-        <ListView x:Name="OperationsListView" ItemsSource="{Binding Operations}">
-            <ListView.ItemTemplate>
+        <CollectionView x:Name="OperationsCollectionView" ItemsSource="{Binding Operations}">
+            <CollectionView.Header>
+                <Grid BackgroundColor="CadetBlue">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Дата" FontSize="16" Grid.Column="0" />
+                    <Label Text="Тип операции" FontSize="16" Grid.Column="1" />
+                    <Label Text="Сумма" FontSize="16" Grid.Column="2" />
+                    <Label Text="Описание" FontSize="16" Grid.Column="3" />
+                    <Label Text="" FontSize="16" Grid.Column="4" />
+                </Grid>
+            </CollectionView.Header>
+            <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <ViewCell>
-                        <VerticalStackLayout Padding="5">
-                            <Label Text="{Binding Date}"/>
-                            <Label Text="{Binding Type}"/>
-                            <Label Text="{Binding Amount}"/>
-                            <Label Text="{Binding Description}"/>
+                        <Grid Padding="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="{Binding Date}" Grid.Column="0"/>
+                            <Label Text="{Binding Type}" Grid.Column="1"/>
+                            <Label Text="{Binding Amount}" Grid.Column="2"/>
+                            <Label Text="{Binding Description}" Grid.Column="3"/>
                             <Button Text="Редактировать" HorizontalOptions="Start" 
                                     Command="{Binding BindingContext.EditCommand, 
                                     Source={RelativeSource AncestorType={x:Type ContentPage}}}" 
-                                    CommandParameter="{Binding .}"/>
-                            <Button Text="Удалить" HorizontalOptions="Start" 
+                                    CommandParameter="{Binding .}" 
+                                    Grid.Column="4"/>
+                            <Button Text="Удалить" HorizontalOptions="End" 
                                     Command="{Binding BindingContext.DeleteCommand, 
                                     Source={RelativeSource AncestorType={x:Type ContentPage}}}" 
-                                    CommandParameter="{Binding .}"/>    
-                        </VerticalStackLayout>
+                                    CommandParameter="{Binding .}"
+                                    Grid.Column="4"/>    
+                        </Grid>
                         
-                    </ViewCell>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </VerticalStackLayout>
 </ContentPage>

@@ -21,10 +21,10 @@ namespace Wallet22.MVVM.ViewModel
             _description = operation.Description;
             EditCommand = new Command(async () =>
             {
-                operation.Date = _date;
-                operation.Type = _type;
-                operation.Amount = Convert.ToInt32(_amount);
-                operation.Description = _description;
+                operation.Date = Date;
+                operation.Type = Type;
+                operation.Amount = Convert.ToInt32(Amount);
+                operation.Description = Description;
                 await Shell.Current.Navigation.PopAsync();
             },
             canExecute);
