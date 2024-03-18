@@ -18,7 +18,7 @@
             <Button Text="Учёт" WidthRequest="100" HorizontalOptions="Start"
                         Command="{Binding AddCommand}"/>
         </HorizontalStackLayout>
-        <ListView ItemsSource="{Binding Operations}">
+        <ListView x:Name="OperationsListView" ItemsSource="{Binding Operations}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -27,7 +27,11 @@
                             <Label Text="{Binding Type}"/>
                             <Label Text="{Binding Amount}"/>
                             <Label Text="{Binding Description}"/>
+                            <Button Text="Редактировать" HorizontalOptions="Start"
+                                    Command="{Binding EditCommand}"
+                                    CommandParameter="{Binding Source={x:Reference Name=OperationsListView},Path=SelectedItem}"/>
                         </VerticalStackLayout>
+                        
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>

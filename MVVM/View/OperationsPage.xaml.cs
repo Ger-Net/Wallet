@@ -1,3 +1,4 @@
+using Wallet22.MVVM.Model;
 using Wallet22.MVVM.ViewModel;
 
 namespace Wallet22.MVVM.View;
