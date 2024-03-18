@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Wallet22.MVVM.View.OperationsPage"
              Title="OperationsPage">
-
+    
     <VerticalStackLayout Padding="5">
         <HorizontalStackLayout>
             <DatePicker Date="{Binding Date}" />
@@ -31,6 +31,10 @@
                                     Command="{Binding BindingContext.EditCommand, 
                                     Source={RelativeSource AncestorType={x:Type ContentPage}}}" 
                                     CommandParameter="{Binding .}"/>
+                            <Button Text="Удалить" HorizontalOptions="Start" 
+                                    Command="{Binding BindingContext.DeleteCommand, 
+                                    Source={RelativeSource AncestorType={x:Type ContentPage}}}" 
+                                    CommandParameter="{Binding .}"/>    
                         </VerticalStackLayout>
                         
                     </ViewCell>

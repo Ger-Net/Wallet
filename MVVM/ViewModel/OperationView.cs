@@ -12,11 +12,12 @@ namespace Wallet22.MVVM.ViewModel
     {
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand {  get; set; }
+        public ICommand DeleteCommand { get; set; }
         public ObservableCollection<Operation> Operations { get; } = new();
 
         public OperationView() : base()
         {
-
+            
             AddCommand = new Command(() =>
             {
                 Operations.Add(new Operation(Date, Description, Type, Convert.ToInt32(Amount)));
@@ -26,6 +27,10 @@ namespace Wallet22.MVVM.ViewModel
             EditCommand = new Command<Operation>(async (Operation operation) =>
             {
                 await Shell.Current.Navigation.PushAsync(new OperationEditPage(operation));
+            });
+            DeleteCommand = new Command<Operation>((Operation operation) =>
+            {
+                Operations.Remove(operation);
             });
         }
         public override void OnPropertyChanged([CallerMemberName] string prop = "")

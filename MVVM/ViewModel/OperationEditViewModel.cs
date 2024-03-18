@@ -13,7 +13,7 @@ namespace Wallet22.MVVM.ViewModel
     public class OperationEditViewModel : BaseOperationVM
     {
         public ICommand EditCommand { get; set; }
-        public OperationEditViewModel(Operation operation)
+        public OperationEditViewModel(Operation operation) : base()
         {
             _date = operation.Date;
             _type = operation.Type;
