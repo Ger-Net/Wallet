@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Wallet22.MVVM.View.OperationsPage"
+             Title="OperationsPage">
+
+    <VerticalStackLayout Padding="5">
+        <HorizontalStackLayout>
+            <DatePicker Date="{Binding Date}" />
+            <Picker x:Name="picker" SelectedItem="{Binding Type}">
+                <Picker.Items>
+                    <x:String>Доход</x:String>
+                    <x:String>Расход</x:String>
+                </Picker.Items>
+            </Picker>
+            <Entry Placeholder="Сумма" Text="{Binding Amount}"/>
+            <Entry Placeholder="Описание" Text="{Binding Description}"/>
+            <Button Text="Учёт" WidthRequest="100" HorizontalOptions="Start"
+                        Command="{Binding AddCommand}"/>
+        </HorizontalStackLayout>
+        <ListView ItemsSource="{Binding Operations}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <VerticalStackLayout Padding="5">
+                            <Label Text="{Binding Date}"/>
+                            <Label Text="{Binding Type}"/>
+                            <Label Text="{Binding Amount}"/>
+                            <Label Text="{Binding Description}"/>
+                        </VerticalStackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </VerticalStackLayout>
+</ContentPage>
