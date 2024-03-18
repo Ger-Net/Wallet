@@ -64,7 +64,7 @@ namespace Wallet22.MVVM.Model
 
         public Operation(DateTime date,string description, string type, int amount) 
         {
-            ID = new();
+            ID = Guid.NewGuid();
             Date = date;
             Description = description;
             Type = type;
@@ -72,7 +72,7 @@ namespace Wallet22.MVVM.Model
         }
         public Operation()
         {
-            ID = new();
+            ID = Guid.NewGuid();
             Date = DateTime.Now;
             Description = "";
             Type = "";
