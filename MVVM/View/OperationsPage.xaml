@@ -27,9 +27,10 @@
                             <Label Text="{Binding Type}"/>
                             <Label Text="{Binding Amount}"/>
                             <Label Text="{Binding Description}"/>
-                            <Button Text="Редактировать" HorizontalOptions="Start"
-                                    Command="{Binding EditCommand}"
-                                    CommandParameter="{Binding Source={x:Reference Name=OperationsListView},Path=SelectedItem}"/>
+                            <Button Text="Редактировать" HorizontalOptions="Start" 
+                                    Command="{Binding BindingContext.EditCommand, 
+                                    Source={RelativeSource AncestorType={x:Type ContentPage}}}" 
+                                    CommandParameter="{Binding .}"/>
                         </VerticalStackLayout>
                         
                     </ViewCell>

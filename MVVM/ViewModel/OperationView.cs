@@ -14,12 +14,8 @@ namespace Wallet22.MVVM.ViewModel
         public ICommand EditCommand {  get; set; }
         public ObservableCollection<Operation> Operations { get; } = new();
 
-        public OperationView()
+        public OperationView() : base()
         {
-            Func<bool> canExecute = () => !string.IsNullOrWhiteSpace(Description) &&
-                              !string.IsNullOrWhiteSpace(Type) &&
-                              !string.IsNullOrWhiteSpace(Type) &&
-                              int.TryParse(Amount, out int result);
 
             AddCommand = new Command(() =>
             {

@@ -11,11 +11,21 @@ namespace Wallet22.MVVM.ViewModel
     public abstract class BaseOperationVM : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
-
+        protected Func<bool> canExecute;
         protected DateTime _date = DateTime.Now;
         protected string _description;
         protected string _type;
         protected string _amount;
+
+        public BaseOperationVM()
+        {
+            canExecute = () =>
+            {
+                return !string.IsNullOrWhiteSpace(Description) &&
+                                              !string.IsNullOrWhiteSpace(Type) &&
+                                              int.TryParse(Amount, out int result);
+            };
+        }
 
         public DateTime Date
         {

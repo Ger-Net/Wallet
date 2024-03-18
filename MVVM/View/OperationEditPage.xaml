@@ -13,8 +13,8 @@
         </Picker>
         <Entry Placeholder="Сумма" Text="{Binding Amount}"/>
         <Entry Placeholder="Описание" Text="{Binding Description}"/>
-        <Button Text="Учёт" WidthRequest="100" HorizontalOptions="Start"
-                Command="{Binding AddCommand}"/>
+        <Button Text="Сохранить" WidthRequest="100" HorizontalOptions="Start"
+                Command="{Binding EditCommand}"/>
     </VerticalStackLayout>
     
 </ContentPage>
