@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
 
 namespace Wallet22.MVVM.Model
@@ -12,6 +13,7 @@ namespace Wallet22.MVVM.Model
         private string _type;
         private int _amount;
 
+        [Key]
         public Guid ID { get; set; }
         public DateTime Date
         {

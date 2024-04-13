@@ -8,5 +8,6 @@ namespace Wallet22.Services
 {
     public class UsersDB
     {
+        
     }
 }

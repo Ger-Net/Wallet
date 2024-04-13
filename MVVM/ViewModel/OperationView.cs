@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Wallet22.MVVM.Model;
 using Wallet22.MVVM.View;
+using Wallet22.Services;
 
 
 namespace Wallet22.MVVM.ViewModel
@@ -17,10 +18,19 @@ namespace Wallet22.MVVM.ViewModel
         
         public OperationView() : base()
         {
-            
+            using (var db = new UserInAppDB())
+            {
+                Operations = db.Load();
+            }
             AddCommand = new Command(() =>
             {
-                Operations.Add(new Operation(Date, Description, Type, Convert.ToInt32(Amount)));
+                var op = new Operation(Date, Description, Type, Convert.ToInt32(Amount));
+                Operations.Add(op);
+                using(var db = new UserInAppDB())
+                {
+                    db.Operations.Add(op);
+                    db.SaveChanges();
+                }
                 PropertyNulling();
             },
             canExecute);
@@ -31,7 +41,13 @@ namespace Wallet22.MVVM.ViewModel
             });
             DeleteCommand = new Command<Operation>((Operation operation) =>
             {
+                using (var db = new UserInAppDB())
+                {
+                    db.Operations.Remove(operation);
+                    db.SaveChanges();
+                }
                 Operations.Remove(operation);
+                
             });
         }
         public override void OnPropertyChanged([CallerMemberName] string prop = "")
