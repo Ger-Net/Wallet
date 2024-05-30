@@ -54,4 +54,5 @@ public partial class OperationsPage : ContentPage
         }
         _viewModel.SortCommand.Execute(new SortDTO(direction,column));
     }
+
 }

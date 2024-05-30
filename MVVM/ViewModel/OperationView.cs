@@ -13,13 +13,50 @@ namespace Wallet22.MVVM.ViewModel
 {
     public class OperationView : BaseOperationVM
     {
+        #region Props
         public SortDirection SortDirection { get; set; } = SortDirection.None;
         public SortColumn SortColumn { get; set; }
 
+        private int _totalAmount;
+        public int TotalAmount
+        {
+            get => _totalAmount;
+            set
+            {
+                _totalAmount = value;
+                OnPropertyChanged(nameof(TotalAmount));
+            }
+        }
+
+        private int _totalIncreaseAmount;
+        public int TotalIncreaseAmount
+        {
+            get => _totalIncreaseAmount;
+            set
+            {
+                _totalIncreaseAmount = value;
+                OnPropertyChanged(nameof(TotalIncreaseAmount));
+            }
+        }
+
+        private int _totalDecreaseAmount;
+        public int TotalDecreaseAmount
+        {
+            get => _totalDecreaseAmount;
+            set
+            {
+                _totalDecreaseAmount = value;
+                OnPropertyChanged(nameof(TotalDecreaseAmount));
+            }
+        }
+        
+        #endregion
+        #region Commands
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand {  get; set; }
         public ICommand DeleteCommand { get; set; }
         public Command<SortDTO> SortCommand { get; set; }
+        #endregion
         public ObservableCollection<Operation> Operations { get; private set; } = new();
         
         public OperationView() : base()
@@ -38,12 +75,13 @@ namespace Wallet22.MVVM.ViewModel
                     db.SaveChanges();
                 }
                 PropertyNulling();
+                Calculate();
             },
             canExecute);
             EditCommand = new Command<Operation>(async (Operation operation) =>
             {
                 await Shell.Current.Navigation.PushAsync(new OperationEditPage(operation));
-
+                Calculate();
             });
             DeleteCommand = new Command<Operation>((Operation operation) =>
             {
@@ -53,9 +91,10 @@ namespace Wallet22.MVVM.ViewModel
                     db.SaveChanges();
                 }
                 Operations.Remove(operation);
-                
+                Calculate();
             });
             SortCommand = new Command<SortDTO>(Sort);
+            Calculate();
         }
         public override void OnPropertyChanged([CallerMemberName] string prop = "")
         {
@@ -102,6 +141,15 @@ namespace Wallet22.MVVM.ViewModel
             {
                 Operations.Add(item);
             }
+        }
+
+        private void Calculate()
+        {
+            TotalIncreaseAmount = Operations.Where(t => t.Type == "Доход").Sum(t => t.Amount);
+            TotalDecreaseAmount = Operations.Where(t => t.Type == "Расход").Sum(t => t.Amount);
+
+            TotalAmount = TotalIncreaseAmount - TotalDecreaseAmount;
+
         }
     }
 }

@@ -66,6 +66,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="akgul.Maui.DataGrid" Version="4.0.1" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="9.0.0" />
 		<PackageReference Include="Google.Cloud.Firestore" Version="3.6.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.4" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.4" />
