@@ -19,6 +19,8 @@ namespace Wallet22
     		builder.Logging.AddDebug();
 #endif
 
+
+
             return builder.Build();
         }
     }

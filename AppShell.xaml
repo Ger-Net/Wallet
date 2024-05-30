@@ -5,15 +5,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Wallet22"
     xmlns:pages="clr-namespace:Wallet22.MVVM.View"
-    Shell.FlyoutBehavior="Disabled"
-    Title="Wallet22">
-    
-    <TabBar Route="MainPage">
-        <Tab Title="Operations" Icon="op.png">
-            <ShellContent ContentTemplate="{DataTemplate pages:OperationsPage}"/>
-        </Tab>
-        <Tab Title="Settings" Icon="set.png">
-            <ShellContent ContentTemplate="{DataTemplate pages:SettingsPage}"/>
-        </Tab>
-    </TabBar>
+    Title="Wallet22"
+    xmlns:shell="clr-namespace:Microsoft.Maui.Controls.Handlers.Compatibility;assembly=Microsoft.Maui.Controls">
+
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <ShellContent Title="{Binding Title}" ContentTemplate="{Binding ContentTemplate}" />
+        </DataTemplate>
+    </Shell.ItemTemplate>
+
+    <ShellContent Title="Operations" ContentTemplate="{DataTemplate pages:OperationsPage}" />
+    <ShellContent Title="Settings" ContentTemplate="{DataTemplate pages:SettingsPage}" />
+
 </Shell>

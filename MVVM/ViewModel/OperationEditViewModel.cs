@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Wallet22.MVVM.Model;
 using Wallet22.Services;
@@ -36,8 +30,6 @@ namespace Wallet22.MVVM.ViewModel
                 }
 
                 await Shell.Current.Navigation.PopAsync();
-
-                
             },
             canExecute);
             _date = operation.Date;

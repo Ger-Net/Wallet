@@ -28,18 +28,33 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Label Text="Дата" FontSize="16" Grid.Column="0" />
-                    <Label Text="Тип операции" FontSize="16" Grid.Column="1" />
-                    <Label Text="Сумма" FontSize="16" Grid.Column="2" />
-                    <Label Text="Описание" FontSize="16" Grid.Column="3" />
+                    <Label Text="Дата" FontSize="16" Grid.Column="0">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnDateTapped"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label Text="Тип операции" FontSize="16" Grid.Column="1">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnTypeTapped"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label Text="Сумма" FontSize="16" Grid.Column="2">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnSumTapped"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label Text="Описание" FontSize="16" Grid.Column="3">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnDescTapped"/>
+                        </Label.GestureRecognizers>
+                    </Label>
                     <Label Text="" FontSize="16" Grid.Column="4" />
                 </Grid>
             </CollectionView.Header>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                        <Grid Padding="5">
-                            
-                            <Grid.ColumnDefinitions>
+                    <Grid Padding="5">
+                        <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
