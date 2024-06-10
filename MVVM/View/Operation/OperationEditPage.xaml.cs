@@ -6,7 +6,7 @@ namespace Wallet22.MVVM.View;
 public partial class OperationEditPage : ContentPage
 {
 	public Operation Operation { get; set; }
-	public OperationEditPage(Operation? operation)
+	public OperationEditPage(Operation? operation, IUserService userService)
 	{
 		InitializeComponent();
 
@@ -15,6 +15,6 @@ public partial class OperationEditPage : ContentPage
 			operation = new Operation();
 		}
 		Operation = operation;
-		BindingContext = new OperationEditViewModel(Operation);
+		BindingContext = new OperationEditViewModel(Operation,userService);
 	}
 }

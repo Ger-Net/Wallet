@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using Wallet22.Services.UserServices;
 
 namespace Wallet22
 {
@@ -21,7 +22,8 @@ namespace Wallet22
     		builder.Logging.AddDebug();
 #endif
 
-
+            builder.Services.AddSingleton<IUserService, UserService>();
+            builder.Services.AddSingleton<App>();
 
             return builder.Build();
         }

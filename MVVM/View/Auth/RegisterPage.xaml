@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Wallet22.MVVM.View.Auth.LoginPage"
-             Title="LoginPage">
+             x:Class="Wallet22.MVVM.View.Auth.RegisterPage"
+             Title="RegisterPage">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -19,16 +19,13 @@
             <Entry Placeholder="Email or username" Text="{Binding UserName}"/>
             <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}"/>
 
-            <Button Text="Login" Command="{Binding LoginCommand}"/>
+            <Button Text="Register" Command="{Binding Register}"/>
 
-            <Label Text="Username or password is incorrect, check this out or create new profile"
-                   TextColor="Red"
-                   IsVisible="{Binding InvalidData}"/>
         </StackLayout>
 
-        <Button Text="Register" Grid.Row="0" Grid.Column="1"
+        <Button Text="Back" Grid.Row="0" Grid.Column="1"
                 HorizontalOptions="End" VerticalOptions="Start"
                 Margin="0, 10, 10, 0"
-                Command="{Binding OpenRegisterCommand}"/>
+                Command="{Binding BackCommand}"/>
     </Grid>
 </ContentPage>

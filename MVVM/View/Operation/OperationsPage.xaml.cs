@@ -7,10 +7,10 @@ namespace Wallet22.MVVM.View;
 public partial class OperationsPage : ContentPage
 {
     private OperationView _viewModel;
-	public OperationsPage()
+	public OperationsPage(IUserService userService)
 	{
         InitializeComponent();
-        _viewModel = new OperationView();
+        _viewModel = new OperationView(userService);
 		BindingContext = _viewModel;
 	}
 
