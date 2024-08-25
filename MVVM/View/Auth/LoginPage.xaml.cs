@@ -4,9 +4,9 @@ namespace Wallet22.MVVM.View.Auth;
 
 public partial class LoginPage : ContentPage
 {
-	public LoginPage(IUserService userService)
+	public LoginPage()
 	{
 		InitializeComponent();
-		BindingContext = new LoginViewModel(userService);
-    }
+		BindingContext = new LoginViewModel();
+	}
 }

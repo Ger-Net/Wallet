@@ -1,18 +1,23 @@
-﻿using Wallet22.MVVM.View.Auth;
+﻿using NLog;
+using NLog.Config;
+using NLog.Targets;
+using Wallet22.MVVM.View.Auth;
 
 namespace Wallet22
 {
     
     public partial class App : Application
     {
-        private IUserService _userService;
-        public App(IUserService userService)
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
+        public App()
         {
             InitializeComponent();
-            _userService = userService;
-            //TODO
-            MainPage = new AppShell(_userService);
-            
+
+            var config = new LoggingConfiguration();
+            config.AddRuleForAllLevels(new FileTarget("file"));
+            LogManager.Configuration = config;
+
+            MainPage = new AppShell();
         }
     }
 }

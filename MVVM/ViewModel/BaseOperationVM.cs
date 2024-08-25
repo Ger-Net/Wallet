@@ -8,26 +8,23 @@ using System.Threading.Tasks;
 
 namespace Wallet22.MVVM.ViewModel
 {
-    public abstract class BaseOperationVM : INotifyPropertyChanged, IExecutable
+    public abstract class BaseOperationVM : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
-        public Func<bool> CanExecute { get; init; }
-
-        protected IUserService _userService;
-
+        protected Func<bool> canExecute;
         protected DateTime _date = DateTime.Now;
         protected string _description;
         protected string _type;
         protected string _amount;
-        public BaseOperationVM(IUserService userService)
+
+        public BaseOperationVM()
         {
-            CanExecute = () =>
+            canExecute = () =>
             {
                 return !string.IsNullOrWhiteSpace(Description) &&
                                               !string.IsNullOrWhiteSpace(Type) &&
                                               int.TryParse(Amount, out int result);
             };
-            _userService = userService;
         }
 
         public DateTime Date

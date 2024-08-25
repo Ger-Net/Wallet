@@ -15,7 +15,6 @@ namespace Wallet22.MVVM.Model
 
         [Key]
         public Guid ID { get; set; }
-        public User User { get; set; }
         public DateTime Date
         {
             get => _date;

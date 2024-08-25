@@ -59,39 +59,42 @@ namespace Wallet22.MVVM.ViewModel
         #endregion
         public ObservableCollection<Operation> Operations { get; private set; } = new();
         
-        public OperationView(IUserService userService) : base(userService)
+        public OperationView() : base()
         {
-            Operations = userService.GetOperations();
+            using (var db = new UserInAppDB())
+            {
+                Operations = db.Load();
+            }
             AddCommand = new Command(() =>
             {
                 var op = new Operation(Date, Description, Type, Convert.ToInt32(Amount));
                 Operations.Add(op);
-                using(var db = new UserDB())
+                using(var db = new UserInAppDB())
                 {
                     db.Operations.Add(op);
                     db.SaveChanges();
                 }
                 PropertyNulling();
-                CalculateAmount();
+                Calculate();
             },
-            CanExecute);
+            canExecute);
             EditCommand = new Command<Operation>(async (Operation operation) =>
             {
-                await Shell.Current.Navigation.PushAsync(new OperationEditPage(operation, userService));
-                CalculateAmount();
+                await Shell.Current.Navigation.PushAsync(new OperationEditPage(operation));
+                Calculate();
             });
             DeleteCommand = new Command<Operation>((Operation operation) =>
             {
-                using (var db = new UserDB())
+                using (var db = new UserInAppDB())
                 {
                     db.Operations.Remove(operation);
                     db.SaveChanges();
                 }
                 Operations.Remove(operation);
-                CalculateAmount();
+                Calculate();
             });
             SortCommand = new Command<SortDTO>(Sort);
-            CalculateAmount();
+            Calculate();
         }
         public override void OnPropertyChanged([CallerMemberName] string prop = "")
         {
@@ -132,6 +135,7 @@ namespace Wallet22.MVVM.ViewModel
                             : y.Description.CompareTo(x.Description));
                     break;
             }
+            //Operations = new(op);
             Operations.Clear();
             foreach (var item in op)
             {
@@ -139,18 +143,13 @@ namespace Wallet22.MVVM.ViewModel
             }
         }
 
-        private void CalculateAmount()
+        private void Calculate()
         {
             TotalIncreaseAmount = Operations.Where(t => t.Type == "Доход").Sum(t => t.Amount);
             TotalDecreaseAmount = Operations.Where(t => t.Type == "Расход").Sum(t => t.Amount);
 
             TotalAmount = TotalIncreaseAmount - TotalDecreaseAmount;
 
-        }
-
-        public void SetOperations(ObservableCollection<Operation> operations)
-        {
-            Operations = operations;
         }
     }
 }

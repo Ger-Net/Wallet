@@ -8,8 +8,9 @@ namespace Wallet22.MVVM.ViewModel
     public class OperationEditViewModel : BaseOperationVM
     {
         public ICommand EditCommand { get; set; }
-        public OperationEditViewModel(Operation operation,IUserService userService) : base(userService)
+        public OperationEditViewModel(Operation operation) : base()
         {
+            
             EditCommand = new Command(async () =>
             {
                 operation.Date = Date;
@@ -17,7 +18,7 @@ namespace Wallet22.MVVM.ViewModel
                 operation.Amount = Convert.ToInt32(Amount);
                 operation.Description = Description;
 
-                using (var db = new UserDB())
+                using (var db = new UserInAppDB())
                 {
                     var id = operation.ID;
                     var op = db.Operations.FirstOrDefault(t => t.ID == id);
@@ -30,7 +31,7 @@ namespace Wallet22.MVVM.ViewModel
 
                 await Shell.Current.Navigation.PopAsync();
             },
-            CanExecute);
+            canExecute);
             _date = operation.Date;
             _type = operation.Type;
             _amount = operation.Amount.ToString();

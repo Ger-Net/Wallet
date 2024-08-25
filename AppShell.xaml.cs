@@ -2,11 +2,9 @@
 {
     public partial class AppShell : Shell
     {
-        private IUserService _userService;
-        public AppShell(IUserService userService)
+        public AppShell()
         {
             InitializeComponent();
-            _userService = userService;
         }
     }
 }

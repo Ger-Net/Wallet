@@ -3,32 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Wallet22.MVVM.View.Auth.LoginPage"
              Title="LoginPage">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
+    
+    <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+        <Label Text="Login" FontSize="Title" Margin="0, 0, 0, 20"/>
 
-        <StackLayout Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center">
-            <Label Text="Login" FontSize="Title" Margin="0, 0, 0, 20"/>
+        <Entry Placeholder="Email or username"/>
+        <Entry Placeholder="Password" IsPassword="True"/>
 
-            <Entry Placeholder="Email or username" Text="{Binding UserName}"/>
-            <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}"/>
-
-            <Button Text="Login" Command="{Binding LoginCommand}"/>
-
-            <Label Text="Username or password is incorrect, check this out or create new profile"
-                   TextColor="Red"
-                   IsVisible="{Binding InvalidData}"/>
-        </StackLayout>
-
-        <Button Text="Register" Grid.Row="0" Grid.Column="1"
-                HorizontalOptions="End" VerticalOptions="Start"
-                Margin="0, 10, 10, 0"
-                Command="{Binding OpenRegisterCommand}"/>
-    </Grid>
+        <Button Text="Login" Command="{Binding LoginCommand}"/>
+    </StackLayout>
+    
 </ContentPage>
