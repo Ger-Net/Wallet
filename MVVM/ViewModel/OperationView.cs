@@ -58,18 +58,21 @@ namespace Wallet22.MVVM.ViewModel
         public Command<SortDTO> SortCommand { get; set; }
         #endregion
         public ObservableCollection<Operation> Operations { get; private set; } = new();
-        
-        public OperationView() : base()
+        public void Init()
         {
-            using (var db = new UserInAppDB())
+            using (var db = new UsersDb())
             {
                 Operations = db.Load();
             }
+        }
+        public OperationView() : base()
+        {
+            
             AddCommand = new Command(() =>
             {
                 var op = new Operation(Date, Description, Type, Convert.ToInt32(Amount));
                 Operations.Add(op);
-                using(var db = new UserInAppDB())
+                using(var db = new UsersDb())
                 {
                     db.Operations.Add(op);
                     db.SaveChanges();
@@ -85,7 +88,7 @@ namespace Wallet22.MVVM.ViewModel
             });
             DeleteCommand = new Command<Operation>((Operation operation) =>
             {
-                using (var db = new UserInAppDB())
+                using (var db = new UsersDb())
                 {
                     db.Operations.Remove(operation);
                     db.SaveChanges();

@@ -1,5 +1,3 @@
-using Microsoft.Maui.Controls;
-using System.Drawing;
 using Wallet22.MVVM.ViewModel;
 
 namespace Wallet22.MVVM.View;

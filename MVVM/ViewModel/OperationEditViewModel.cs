@@ -18,7 +18,7 @@ namespace Wallet22.MVVM.ViewModel
                 operation.Amount = Convert.ToInt32(Amount);
                 operation.Description = Description;
 
-                using (var db = new UserInAppDB())
+                using (var db = new UsersDb())
                 {
                     var id = operation.ID;
                     var op = db.Operations.FirstOrDefault(t => t.ID == id);

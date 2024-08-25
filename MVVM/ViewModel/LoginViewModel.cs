@@ -16,7 +16,7 @@ namespace Wallet22.MVVM.ViewModel
         {
             LoginCommand = new Command(async () =>
             {
-                await Shell.Current.Navigation.PushAsync(new OperationsPage());
+                await Shell.Current.Navigation.PopAsync();
             });
         }
     }
