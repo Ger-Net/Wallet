@@ -1,12 +1,13 @@
 using Wallet22.MVVM.Model;
 using Wallet22.MVVM.ViewModel;
+using Wallet22.Services.UserServices;
 
 namespace Wallet22.MVVM.View;
 
 public partial class OperationEditPage : ContentPage
 {
 	public Operation Operation { get; set; }
-	public OperationEditPage(Operation? operation)
+	public OperationEditPage(Operation? operation,IUserService userService)
 	{
 		InitializeComponent();
 
@@ -15,6 +16,6 @@ public partial class OperationEditPage : ContentPage
 			operation = new Operation();
 		}
 		Operation = operation;
-		BindingContext = new OperationEditViewModel(Operation);
+		BindingContext = new OperationEditViewModel(Operation,userService);
 	}
 }

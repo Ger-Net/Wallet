@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Wallet22.Services.UserServices;
 
 namespace Wallet22.MVVM.ViewModel
 {
@@ -16,9 +17,10 @@ namespace Wallet22.MVVM.ViewModel
         protected string _description;
         protected string _type;
         protected string _amount;
-
-        public BaseOperationVM()
+        protected IUserService userService;
+        public BaseOperationVM(IUserService userService)
         {
+            this.userService = userService;
             canExecute = () =>
             {
                 return !string.IsNullOrWhiteSpace(Description) &&
