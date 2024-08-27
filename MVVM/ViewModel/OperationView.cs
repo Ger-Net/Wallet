@@ -6,6 +6,7 @@ using System.Windows.Input;
 using Wallet22.MVVM.Model;
 using Wallet22.MVVM.View;
 using Wallet22.Services;
+using Wallet22.Services.UserServices;
 using Operation = Wallet22.MVVM.Model.Operation;
 
 
@@ -58,41 +59,26 @@ namespace Wallet22.MVVM.ViewModel
         public Command<SortDTO> SortCommand { get; set; }
         #endregion
         public ObservableCollection<Operation> Operations { get; private set; } = new();
-        public void Init()
-        {
-            using (var db = new UsersDb())
-            {
-                Operations = db.Load();
-            }
-        }
-        public OperationView() : base()
+        public OperationView(IUserService userService) : base(userService)
         {
             
             AddCommand = new Command(() =>
             {
                 var op = new Operation(Date, Description, Type, Convert.ToInt32(Amount));
                 Operations.Add(op);
-                using(var db = new UsersDb())
-                {
-                    db.Operations.Add(op);
-                    db.SaveChanges();
-                }
+                userService.Add(op);
                 PropertyNulling();
                 Calculate();
             },
             canExecute);
             EditCommand = new Command<Operation>(async (Operation operation) =>
             {
-                await Shell.Current.Navigation.PushAsync(new OperationEditPage(operation));
+                await Shell.Current.Navigation.PushAsync(new OperationEditPage(operation, userService));
                 Calculate();
             });
             DeleteCommand = new Command<Operation>((Operation operation) =>
             {
-                using (var db = new UsersDb())
-                {
-                    db.Operations.Remove(operation);
-                    db.SaveChanges();
-                }
+                userService.Remove(operation);
                 Operations.Remove(operation);
                 Calculate();
             });
@@ -146,6 +132,8 @@ namespace Wallet22.MVVM.ViewModel
             }
         }
 
+
+        //TODO calculate only month
         private void Calculate()
         {
             TotalIncreaseAmount = Operations.Where(t => t.Type == "Доход").Sum(t => t.Amount);

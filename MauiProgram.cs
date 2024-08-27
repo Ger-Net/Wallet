@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using Wallet22.MVVM.View;
+using Wallet22.Services.UserServices;
 
 namespace Wallet22
 {
@@ -17,6 +19,8 @@ namespace Wallet22
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            builder.Services.AddTransient<IUserService,UserService>();
+            builder.Services.AddTransient<OperationsPage>();
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
