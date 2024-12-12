@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Wallet22.MVVM.View.Auth.RegisterPage"
+             Title="RegisterPage">
+    
+    
+    <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+        <Button VerticalOptions="Center" HorizontalOptions="End" Text="Back" Command="{Binding BackToLoginCommand}"/>
+        <Label Text="Register" FontSize="Title" Margin="0, 0, 0, 20"/>
+
+        <Entry Placeholder="Email or username" Text="{Binding Username}"/>
+        <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}"/>
+        <Entry Placeholder="Confirm Password" IsPassword="True" Text="{Binding ConfirmPassword}"/>
+
+        <Label Text="Password incorrect" IsVisible="{Binding IncorrectPassword}" TextColor="Red"/>
+        <Label Text="User already exist" IsVisible="{Binding UserExist}" TextColor="Red"/>
+        <Button Text="Register" Command="{Binding RegisterCommand}"/>
+        
+    </StackLayout>
+</ContentPage>

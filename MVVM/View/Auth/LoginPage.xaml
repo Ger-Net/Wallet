@@ -13,6 +13,7 @@
         <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}"/>
 
         <Button Text="Login" Command="{Binding LoginCommand}"/>
+        <Button Text="Register" Command="{Binding RedirectToRegisterCommand}"/>
     </StackLayout>
     
 </ContentPage>

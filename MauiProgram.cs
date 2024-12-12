@@ -7,6 +7,7 @@ namespace Wallet22
 {
     public static class MauiProgram
     {
+        
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
@@ -18,14 +19,19 @@ namespace Wallet22
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
-
-            builder.Services.AddTransient<IUserService,UserService>();
-            builder.Services.AddTransient<OperationsPage>();
+            ServicesRegistration(builder);
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();
         }
+
+        private static void ServicesRegistration(MauiAppBuilder builder)
+        {
+            builder.Services.AddTransient<IUserService, UserService>();
+            builder.Services.AddTransient<OperationsPage>();
+        }
+
     }
 }

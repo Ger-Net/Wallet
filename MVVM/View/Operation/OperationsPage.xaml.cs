@@ -1,4 +1,4 @@
-using Wallet22.MVVM.ViewModel;
+using Wallet22.MVVM.ViewModel.Operations;
 using Wallet22.Services.UserServices;
 
 namespace Wallet22.MVVM.View;
