@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Wallet.Core.DataBases;
 using Wallet.Core.Abstract;
+using Wallet.Application.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,7 @@ builder.Services.AddDbContext<UserDbContext>(
         options.UseNpgsql(builder.Configuration.GetConnectionString(nameof(UserDbContext)));
     });
 
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository,UsersRepository>();
 
 var app = builder.Build();

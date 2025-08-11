@@ -2,7 +2,7 @@
 services:
   postgres:
     container_name: postgres
-    image: postgres_latest
+    image: postgres:latest
     environment:
         POSTGRES_DB: "userdb"
         POSTGRES_USER: "postgres"
