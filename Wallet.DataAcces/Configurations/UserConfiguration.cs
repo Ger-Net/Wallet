@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Wallet.Core.Entities;
 
 namespace Wallet.Core.Configurations
@@ -17,7 +12,7 @@ namespace Wallet.Core.Configurations
             builder.Property(x => x.Name).IsRequired();
             builder.Property(x => x.Email).IsRequired();
             builder.Property(x => x.Password).IsRequired();
-            builder.Property(x => x.Operations);
+            builder.HasMany(x => x.Operations).WithOne(x => x.User).HasForeignKey(x => x.UserId);
         }
     }
 }

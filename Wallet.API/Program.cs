@@ -9,10 +9,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<UserDbContext>(
+builder.Services.AddDbContext<AppDbContext>(
     options => 
     {
-        options.UseNpgsql(builder.Configuration.GetConnectionString(nameof(UserDbContext)));
+        options.UseNpgsql(builder.Configuration.GetConnectionString(nameof(AppDbContext)));
     });
 
 builder.Services.AddScoped<IUserService, UserService>();

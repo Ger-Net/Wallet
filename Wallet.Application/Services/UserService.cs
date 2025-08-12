@@ -25,9 +25,9 @@ namespace Wallet.Application.Services
             return await _userRepository.Get(id);
         }
 
-        public async Task<Guid> Update(Guid id, string name, string description, decimal amount, OperationType type)
+        public async Task<Guid> Update(Guid id, string name, string email, string password)
         {
-            return await _userRepository.Update(id,name,description,amount,type);
+            return await _userRepository.Update(id,name,email,password);
         }
     }
 }

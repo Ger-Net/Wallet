@@ -7,6 +7,6 @@ namespace Wallet.Core.Abstract
         Task<Guid> Create(User user);
         Task<Guid> Delete(Guid id);
         Task<User> Get(Guid id);
-        Task<Guid> Update(Guid id, string name, string description, decimal amount, OperationType type);
+        Task<Guid> Update(Guid id, string name, string email, string password);
     }
 }

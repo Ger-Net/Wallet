@@ -9,6 +9,7 @@ namespace Wallet.Core.Entities
         public string Description { get; set; } = string.Empty;
         public decimal Amount { get; set; }
         public Guid UserId { get; set; }
+        public UserEntity User { get; set; }
         public OperationType Type { get; set; }
     }
 }

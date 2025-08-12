@@ -7,8 +7,8 @@ namespace Wallet.Core.Abstract
 {
     public class UsersRepository : IUserRepository
     {
-        private readonly UserDbContext _dbContext;
-        public UsersRepository(UserDbContext dbContext)
+        private readonly AppDbContext _dbContext;
+        public UsersRepository(AppDbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -33,14 +33,14 @@ namespace Wallet.Core.Abstract
 
             return userEntity.Id;
         }
-        public async Task<Guid> Update(Guid id, string name, string description,decimal amount, OperationType type)
+        public async Task<Guid> Update(Guid id, string name, string email, string password)
         {
-            //TODO fix mapping
             await _dbContext.Users
                 .Where(u => u.Id == id)
-                .ExecuteUpdateAsync(u => 
-                    u.SetProperty(u => u.Operations.First(o => o.UserId == u.Id), 
-                    u => MapOperation(Operation.Create(name,description,amount,u.Id,type).Operation)));
+                .ExecuteUpdateAsync(u =>
+                    u.SetProperty(u => u.Name, u => name)
+                    .SetProperty(u => u.Email, u => email)
+                    .SetProperty(u => u.Password, u => password));
 
             return id;
         }
@@ -59,26 +59,14 @@ namespace Wallet.Core.Abstract
             {
                 foreach (OperationEntity entity in operationEntities)
                 {
-                    Operation operation = Operation.Create(entity.Name, entity.Description,entity.Amount, entity.UserId, entity.Type).Operation;
+                    User user = User.CreateUser(entity.User.Name, entity.User.Email, entity.User.Password, new()).User;
+                    Operation operation = Operation.Create(entity.Name, entity.Description,entity.Amount, user, entity.Type).Operation;
 
                     operations.Add(operation);
                 }
             }
 
             return operations;
-        }
-        private OperationEntity MapOperation(Operation operation)
-        {
-            return new OperationEntity
-            {
-                Name = operation.Name,
-                Description = operation.Description,
-                Amount = operation.Amount,
-                UserId = operation.UserId,
-                Type = operation.Type,
-            };
-        }
-
-        
+        }     
     }
 }

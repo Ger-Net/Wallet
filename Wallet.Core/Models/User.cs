@@ -17,7 +17,7 @@ namespace Wallet.Core.Models
         public string Name { get; } = string.Empty;
         public string Email { get; } = string.Empty;
         public string Password { get; } = string.Empty;
-        public List<Operation> Operations { get; }
+        public List<Operation> Operations { get; } = [];
         public static (User User, string Error) CreateUser(string name, string email, string password, List<Operation> operations)
         {
             StringBuilder errorStringBuilder = new StringBuilder();
