@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Wallet.Core.Models;
-using Wallet.Core.DataBases;
-using Wallet.Core.Entities;
+using Wallet.Persistence.DataBases;
+using Wallet.Persistence.Entities;
 
 namespace Wallet.Core.Abstract
 {

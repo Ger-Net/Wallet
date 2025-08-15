@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36301.6 d17.14
+VisualStudioVersion = 17.14.36301.6
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet.API", "Wallet.API\Wallet.API.csproj", "{C26F23CE-EEB0-4BF9-B171-6A1E47C45814}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet.Core", "Wallet.Core\Wallet.Core.csproj", "{C82A2505-EE3E-43AB-993C-84CD00DB39B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet.DataAccess", "Wallet.DataAcces\Wallet.DataAccess.csproj", "{335ACBE3-B48D-4A56-8410-C0B99E37F133}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet.Persistence", "Wallet.DataAcces\Wallet.Persistence.csproj", "{335ACBE3-B48D-4A56-8410-C0B99E37F133}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet.Application", "Wallet.Application\Wallet.Application.csproj", "{410F0A0A-1FB7-44D7-BCEB-3A365C06C0BD}"
 EndProject

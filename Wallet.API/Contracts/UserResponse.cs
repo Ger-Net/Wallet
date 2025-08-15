@@ -6,7 +6,6 @@ namespace Wallet.API.Contracts
         Guid Id, 
         string Name, 
         string Email,
-        string Password,
-        List<Operation> Operations);
+        string Password);
 
 }

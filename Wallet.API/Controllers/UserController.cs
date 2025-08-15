@@ -5,7 +5,7 @@ using Wallet.Core.Abstract;
 namespace Wallet.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("[userController]")]
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
@@ -21,7 +21,7 @@ namespace Wallet.API.Controllers
             if (id == Guid.Empty)
                 return BadRequest();
             var user = await _userService.Get(id);
-            var response = new UserResponse(user.Id,user.Name, user.Email, user.Password, user.Operations);
+            var response = new UserResponse(user.Id,user.Name, user.Email, user.Password);
 
             return Ok(response);
         }
@@ -38,9 +38,9 @@ namespace Wallet.API.Controllers
         }
 
         [HttpPut("{id:guid}")]
-        public async Task<ActionResult<Guid>> UpdateUser(Guid id, [FromBody] OperationRequest request)
+        public async Task<ActionResult<Guid>> UpdateUser(Guid id, [FromBody] UserRequest request)
         {
-            var userId = await _userService.Update(id, request.Name, request.Desription, request.Amount, request.Type);
+            var userId = await _userService.Update(id, request.Name, request.Email, request.Password);
             return Ok(userId);
         }
 

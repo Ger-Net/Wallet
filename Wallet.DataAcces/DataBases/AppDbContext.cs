@@ -1,22 +1,39 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Wallet.Core.Entities;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using Wallet.Core.Configurations;
+using Wallet.Persistence.Configurations;
+using Wallet.Persistence.Entities;
 
-namespace Wallet.Core.DataBases
+namespace Wallet.Persistence.DataBases
 {
     public class AppDbContext : DbContext
-    {   
-        public DbSet<UserEntity> Users { get; set; }
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+    {
+        private readonly IConfiguration _configuration;
+        
+        public AppDbContext(IConfiguration configuration)
         {
-            
+            _configuration = configuration;
         }
+        
+        public DbSet<UserEntity> Users { get; set; }
+        public DbSet<OperationEntity> Operations { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            base.OnConfiguring(optionsBuilder);
+            optionsBuilder
+                .UseNpgsql(_configuration.GetConnectionString(nameof(AppDbContext)))
+                .UseLoggerFactory(GetLoggerFactory())
+                .EnableSensitiveDataLogging();
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new OperationsConfiguration());
+        }
+        private ILoggerFactory GetLoggerFactory()
+        {
+            return LoggerFactory.Create(builder => builder.AddConsole());
         }
     }
 }

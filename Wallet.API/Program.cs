@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using Wallet.Core.DataBases;
 using Wallet.Core.Abstract;
 using Wallet.Application.Services;
+using Wallet.Persistence.DataBases;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,11 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<AppDbContext>(
-    options => 
-    {
-        options.UseNpgsql(builder.Configuration.GetConnectionString(nameof(AppDbContext)));
-    });
+builder.Services.AddDbContext<AppDbContext>();
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository,UsersRepository>();

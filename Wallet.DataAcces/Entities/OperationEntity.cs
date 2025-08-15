@@ -1,6 +1,6 @@
 ﻿using Wallet.Core.Models;
 
-namespace Wallet.Core.Entities
+namespace Wallet.Persistence.Entities
 {
     public class OperationEntity
     {

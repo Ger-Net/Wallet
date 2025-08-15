@@ -2,21 +2,18 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using Wallet.Core.DataBases;
+using Wallet.Persistence.DataBases;
 
 #nullable disable
 
-namespace Wallet.DataAccess.Migrations
+namespace Wallet.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250811164408_init")]
-    partial class init
+    partial class AppDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,15 +42,12 @@ namespace Wallet.DataAccess.Migrations
                     b.Property<int>("Type")
                         .HasColumnType("integer");
 
-                    b.Property<Guid?>("UserEntityId")
-                        .HasColumnType("uuid");
-
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserEntityId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("OperationEntity");
                 });
@@ -83,9 +77,13 @@ namespace Wallet.DataAccess.Migrations
 
             modelBuilder.Entity("Wallet.Core.Entities.OperationEntity", b =>
                 {
-                    b.HasOne("Wallet.Core.Entities.UserEntity", null)
+                    b.HasOne("Wallet.Core.Entities.UserEntity", "User")
                         .WithMany("Operations")
-                        .HasForeignKey("UserEntityId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Wallet.Core.Entities.UserEntity", b =>

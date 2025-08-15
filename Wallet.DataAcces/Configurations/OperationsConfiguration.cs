@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Wallet.Core.Entities;
+using Wallet.Persistence.Entities;
 
-namespace Wallet.DataAccess.Configurations
+namespace Wallet.Persistence.Configurations
 {
     public class OperationsConfiguration : IEntityTypeConfiguration<OperationEntity>
     {
@@ -13,7 +13,6 @@ namespace Wallet.DataAccess.Configurations
             builder.Property(x => x.Description).IsRequired();
             builder.Property(x => x.Amount).IsRequired();
             builder.HasOne(x => x.User).WithMany(x => x.Operations).HasForeignKey(x => x.UserId);
-
         }
     }
 }

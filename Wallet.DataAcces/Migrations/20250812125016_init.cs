@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Wallet.DataAccess.Migrations
+namespace Wallet.Persistence.Migrations
 {
     /// <inheritdoc />
     public partial class init : Migration
@@ -34,23 +34,23 @@ namespace Wallet.DataAccess.Migrations
                     Description = table.Column<string>(type: "text", nullable: false),
                     Amount = table.Column<decimal>(type: "numeric", nullable: false),
                     UserId = table.Column<Guid>(type: "uuid", nullable: false),
-                    Type = table.Column<int>(type: "integer", nullable: false),
-                    UserEntityId = table.Column<Guid>(type: "uuid", nullable: true)
+                    Type = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_OperationEntity", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_OperationEntity_Users_UserEntityId",
-                        column: x => x.UserEntityId,
+                        name: "FK_OperationEntity_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_OperationEntity_UserEntityId",
+                name: "IX_OperationEntity_UserId",
                 table: "OperationEntity",
-                column: "UserEntityId");
+                column: "UserId");
         }
 
         /// <inheritdoc />

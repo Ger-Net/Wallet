@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Wallet.Core.Entities;
+using Wallet.Persistence.Entities;
 
 namespace Wallet.Core.Configurations
 {

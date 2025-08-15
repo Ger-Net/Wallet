@@ -1,4 +1,4 @@
-﻿namespace Wallet.Core.Entities
+﻿namespace Wallet.Persistence.Entities
 {
     public class UserEntity
     {
