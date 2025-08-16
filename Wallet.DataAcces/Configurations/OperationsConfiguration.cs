@@ -8,11 +8,24 @@ namespace Wallet.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<OperationEntity> builder)
         {
-            builder.HasKey(x => x.Id);
-            builder.Property(x => x.Name).IsRequired();
-            builder.Property(x => x.Description).IsRequired();
-            builder.Property(x => x.Amount).IsRequired();
-            builder.HasOne(x => x.User).WithMany(x => x.Operations).HasForeignKey(x => x.UserId);
+            builder
+                .HasKey(x => x.Id);
+
+            builder
+                .Property(x => x.Name)
+                .IsRequired();
+
+            builder
+                .Property(x => x.Description)
+                .IsRequired();
+
+            builder
+                .Property(x => x.Amount)
+                .IsRequired();
+
+            builder
+                .Property(x => x.Type)
+                .IsRequired();
         }
     }
 }

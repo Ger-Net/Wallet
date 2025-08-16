@@ -9,14 +9,14 @@ namespace Wallet.Core.Models
             Id = Guid.NewGuid();
             Name = username;
             Email = email;
-            Password = password;
+            PasswordHash = password;
             Operations = operations;
         }
 
         public Guid Id { get; }
         public string Name { get; } = string.Empty;
         public string Email { get; } = string.Empty;
-        public string Password { get; } = string.Empty;
+        public string PasswordHash { get; } = string.Empty;
         public List<Operation> Operations { get; } = [];
         public static (User User, string Error) CreateUser(string name, string email, string password, List<Operation> operations)
         {

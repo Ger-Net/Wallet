@@ -30,6 +30,8 @@ namespace Wallet.Persistence.DataBases
         {
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new OperationsConfiguration());
+
+            base.OnModelCreating(modelBuilder);
         }
         private ILoggerFactory GetLoggerFactory()
         {

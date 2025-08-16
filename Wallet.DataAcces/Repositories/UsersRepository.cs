@@ -12,61 +12,56 @@ namespace Wallet.Core.Abstract
         {
             _dbContext = dbContext;
         }
-        public async Task<User> Get(Guid id)
-        {
-            var userEntity = await _dbContext.Users.AsNoTracking().FirstAsync(u => u.Id == id);
-            return User.CreateUser(userEntity.Name, userEntity.Email, userEntity.Password, MapOperations(userEntity.Operations)).User;
-        }
-        public async Task<Guid> Create(User user)
-        {
-            UserEntity userEntity = new()
-            {
-                Id = user.Id,
-                Name = user.Name,
-                Email = user.Email,
-                Password = user.Password,
-                Operations = new()
-            };
 
-            await _dbContext.Users.AddAsync(userEntity);
+        public Task AddOperationAsync(Operation operation)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task AddUserAsync(User user)
+        {
+            await _dbContext.AddAsync(user);
             await _dbContext.SaveChangesAsync();
-
-            return userEntity.Id;
         }
-        public async Task<Guid> Update(Guid id, string name, string email, string password)
-        {
-            await _dbContext.Users
-                .Where(u => u.Id == id)
-                .ExecuteUpdateAsync(u =>
-                    u.SetProperty(u => u.Name, u => name)
-                    .SetProperty(u => u.Email, u => email)
-                    .SetProperty(u => u.Password, u => password));
 
-            return id;
+        public Task DeleteOperationAsync(int id)
+        {
+            throw new NotImplementedException();
         }
-        public async Task<Guid> Delete(Guid id)
+
+        public Task DeleteUserAsync(int id)
         {
-            await _dbContext.Users
-                .Where(u => u.Id == id)
-                .ExecuteDeleteAsync();
-            return id;
+            throw new NotImplementedException();
         }
-        private List<Operation> MapOperations(List<OperationEntity> operationEntities)
+
+        public Task<Operation> GetOperationByIdAsync(int id)
         {
-            List<Operation> operations = new List<Operation>();
+            throw new NotImplementedException();
+        }
 
-            if (operationEntities != null && operationEntities.Count > 0)
-            {
-                foreach (OperationEntity entity in operationEntities)
-                {
-                    User user = User.CreateUser(entity.User.Name, entity.User.Email, entity.User.Password, new()).User;
-                    Operation operation = Operation.Create(entity.Name, entity.Description,entity.Amount, user, entity.Type).Operation;
+        public Task<IEnumerable<Operation>> GetOperationsByUserIdAsync(int userId)
+        {
+            throw new NotImplementedException();
+        }
 
-                    operations.Add(operation);
-                }
-            }
+        public Task<User> GetUserByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
 
-            return operations;
-        }     
+        public Task<User> GetUserWithOperationsAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UpdateOperationAsync(Operation operation)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UpdateUserAsync(User user)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -6,9 +6,9 @@ namespace Wallet.API.Controllers
     [Route("[operationController]")]
     public class OperationController: ControllerBase
     {
-        public OperationController(IOperationService)
-        {
+        //public OperationController(IOperationService)
+        //{
             
-        }
+        //}
     }
 }
